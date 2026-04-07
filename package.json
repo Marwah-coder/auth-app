@@ -1,0 +1,23 @@
+{
+  "name": "auth-app",
+  "version": "1.0.0",
+  "description": "Node.js Authentication App with Mocha/Chai Testing",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "mocha tests/**/*.test.js --timeout 10000 --reporter spec",
+    "test:unit": "mocha tests/unit/*.test.js --timeout 10000 --reporter spec",
+    "test:integration": "mocha tests/integration/*.test.js --timeout 10000 --reporter spec",
+    "test:report": "mocha tests/**/*.test.js --timeout 10000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=test-report"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "mocha": "^10.3.0",
+    "chai": "^4.4.1",
+    "supertest": "^6.3.4",
+    "mochawesome": "^7.1.3"
+  }
+}

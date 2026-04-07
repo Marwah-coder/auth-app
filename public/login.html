@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    h2 { text-align: center; color: #333; margin-bottom: 24px; }
+    .field { margin-bottom: 16px; }
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+    input:focus { outline: none; border-color: #667eea; }
+    input.invalid { border-color: #e74c3c; }
+    input.valid-input { border-color: #667eea; }
+    .field-error {
+      font-size: 12px;
+      color: #e74c3c;
+      margin-top: 4px;
+      display: none;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    button:hover { background: #5a67d8; }
+    button:disabled { background: #aaa; cursor: not-allowed; }
+    #message {
+      margin-top: 16px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 14px;
+      display: none;
+    }
+    .success { background: #d4edda; color: #155724; display: block !important; }
+    .error   { background: #f8d7da; color: #721c24; display: block !important; }
+    p { text-align: center; margin-top: 16px; font-size: 14px; }
+    a { color: #667eea; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🔐 Login</h2>
+
+    <div class="field">
+      <input type="email" id="email" placeholder="Email Address" oninput="checkEmail()" />
+      <div class="field-error" id="emailError"></div>
+    </div>
+
+    <div class="field">
+      <input type="password" id="password" placeholder="Password" oninput="checkPassword()" />
+      <div class="field-error" id="passwordError"></div>
+    </div>
+
+    <button id="loginBtn" onclick="handleLogin()">Login</button>
+    <div id="message"></div>
+    <p>Don't have an account? <a href="/signup.html">Sign Up</a></p>
+  </div>
+
+  <script>
+    function checkEmail() {
+      const val = document.getElementById('email').value;
+      const err = document.getElementById('emailError');
+      const inp = document.getElementById('email');
+      let msg = '';
+
+      if (val === '') { msg = 'Email is required'; }
+      else if (!val.includes('@')) { msg = 'Must contain @ symbol'; }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { msg = 'Invalid email format'; }
+
+      if (msg) {
+        err.textContent = msg;
+        err.style.display = 'block';
+        inp.className = 'invalid';
+        return false;
+      }
+      err.style.display = 'none';
+      inp.className = 'valid-input';
+      return true;
+    }
+
+    function checkPassword() {
+      const val = document.getElementById('password').value;
+      const err = document.getElementById('passwordError');
+      const inp = document.getElementById('password');
+      let msg = '';
+
+      if (val === '') { msg = 'Password is required'; }
+      else if (/\s/.test(val)) { msg = 'Password must not contain spaces'; }
+      else if (val.length < 6) { msg = 'Too short (min 6 characters)'; }
+
+      if (msg) {
+        err.textContent = msg;
+        err.style.display = 'block';
+        inp.className = 'invalid';
+        return false;
+      }
+      err.style.display = 'none';
+      inp.className = 'valid-input';
+      return true;
+    }
+
+    async function handleLogin() {
+      const ok = checkEmail() & checkPassword();
+      if (!ok) return;
+
+      const email    = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const msgDiv   = document.getElementById('message');
+      const btn      = document.getElementById('loginBtn');
+
+      btn.disabled = true;
+      btn.textContent = 'Logging in...';
+      msgDiv.style.display = 'none';
+
+      try {
+        const res  = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        msgDiv.textContent = data.message;
+        msgDiv.className   = data.success ? 'success' : 'error';
+      } catch (e) {
+        msgDiv.textContent = 'Server error. Please try again.';
+        msgDiv.className   = 'error';
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Login';
+    }
+  </script>
+</body>
+</html>

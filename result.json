@@ -1,0 +1,32 @@
+﻿{
+  "stats": {
+    "suites": 0,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-04-07T08:30:57.523Z",
+    "end": "2026-04-07T08:30:57.528Z",
+    "duration": 5
+  },
+  "tests": [],
+  "pending": [],
+  "failures": [
+    {
+      "title": "Uncaught error outside test suite",
+      "fullTitle": "Uncaught error outside test suite",
+      "currentRetry": 0,
+      "err": {
+        "stack": "Error: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1940:16)\n    at listenInCluster (node:net:1997:12)\n    at Server.listen (node:net:2102:7)\n    at app.listen (node_modules\\express\\lib\\application.js:635:24)\n    at Object.<anonymous> (src\\app.js:23:5)\n    at Module._compile (node:internal/modules/cjs/loader:1761:14)\n    at Object..js (node:internal/modules/cjs/loader:1893:10)\n    at Module.load (node:internal/modules/cjs/loader:1481:32)\n    at Module._load (node:internal/modules/cjs/loader:1300:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\n    at Module.require (node:internal/modules/cjs/loader:1504:12)\n    at require (node:internal/modules/helpers:152:16)\n    at Object.<anonymous> (tests\\integration\\auth.test.js:3:13)\n    at Module._compile (node:internal/modules/cjs/loader:1761:14)\n    at Object..js (node:internal/modules/cjs/loader:1893:10)\n    at Module.load (node:internal/modules/cjs/loader:1481:32)\n    at Module._load (node:internal/modules/cjs/loader:1300:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\n    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:339:3)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:242:7)\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)",
+        "message": "listen EADDRINUSE: address already in use :::3000",
+        "code": "EADDRINUSE",
+        "errno": -4091,
+        "syscall": "listen",
+        "address": "::",
+        "port": 3000,
+        "uncaught": true
+      }
+    }
+  ],
+  "passes": []
+}
