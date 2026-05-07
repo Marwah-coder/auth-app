@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { validateEmail, validatePassword, validateUsername } = require('../../src/validators');
 
-describe('📧 Email Validation', () => {
+describe(' Email Validation', () => {
   it('should accept valid email', () => {
     expect(validateEmail('test@example.com').valid).to.be.true;
   });
@@ -25,7 +25,7 @@ describe('📧 Email Validation', () => {
   });
 });
 
-describe('🔒 Password Validation', () => {
+describe(' Password Validation', () => {
   it('should accept valid password with letter + number', () => {
     expect(validatePassword('pass123').valid).to.be.true;
   });
@@ -55,7 +55,7 @@ describe('🔒 Password Validation', () => {
   });
 });
 
-describe('👤 Username Validation', () => {
+describe(' Username Validation', () => {
   it('should accept valid username', () => {
     expect(validateUsername('john_doe').valid).to.be.true;
   });

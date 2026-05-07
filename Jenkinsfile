@@ -60,7 +60,7 @@ pipeline {
             echo '✓ All tests passed and pipeline executed successfully!'
         }
         failure {
-            echo '❌ Pipeline failed! Please check the console output and HTML reports.'
+            echo ' Pipeline failed! Please check the console output and HTML reports.'
         }
     }
 }

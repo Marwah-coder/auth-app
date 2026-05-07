@@ -8,7 +8,7 @@ const loginPage  = new LoginPage(request, app);
 const signupPage = new SignupPage(request, app);
 
 // ─── SIGNUP TESTS ────────────────────────────────────────────────
-describe('📝 Signup Integration Tests', () => {
+describe(' Signup Integration Tests', () => {
 
   it('should register user with valid data', async () => {
     const res = await signupPage.submitSignup('john123', 'john@example.com', 'pass123');
@@ -68,7 +68,7 @@ describe('📝 Signup Integration Tests', () => {
 });
 
 // ─── LOGIN TESTS ─────────────────────────────────────────────────
-describe('🔐 Login Integration Tests', () => {
+describe(' Login Integration Tests', () => {
 
   before(async () => {
     await signupPage.submitSignup('loginuser', 'login@example.com', 'mypass123');
@@ -113,7 +113,7 @@ describe('🔐 Login Integration Tests', () => {
   });
 
   it('should handle very long email input (boundary)', async () => {
-    const longEmail = 'a'.repeat(100) + '@example.com';
+    const longEmail = 'a'.repeat(90) + '@example.com';
     const res = await loginPage.submitLogin(longEmail, 'pass123');
     expect(loginPage.isValidationError(res)).to.be.true;
   });
