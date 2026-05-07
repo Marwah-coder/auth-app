@@ -13,7 +13,7 @@ function validateEmail(email) {
   if (!emailRegex.test(email)) {
     return { valid: false, message: 'Invalid email format' };
   }
-  if (email.length > 100) {
+  if (email.length > 90) {
     return { valid: false, message: 'Email must be under 100 characters' };
   }
   return { valid: true, message: 'Valid email' };
